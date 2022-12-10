@@ -19,7 +19,53 @@
         }
         .paginate_button{
             padding: 1px !important;
-        }  
+        } 
+        table.dataTable thead th {
+            background: transparent !important;
+            white-space: nowrap;
+        }
+        
+        table.dataTable thead span.sort-icon {
+            display: inline-block;
+            padding-left: 5px;
+            width: 16px;
+            height: 16px;
+            margin-left: 10px;
+        }
+ 
+        table.dataTable thead .sorting span {
+            background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_both.png') no-repeat center right;
+        }
+        table.dataTable thead .sorting_asc span {
+            background: url('https://img.icons8.com/plumpy/16/null/sort.png') no-repeat center right;
+            transform: rotate(180deg);
+        }
+        table.dataTable thead .sorting_desc span {
+            background: url('https://img.icons8.com/plumpy/16/null/sort.png') no-repeat center right;
+        }
+        
+        table.dataTable thead .sorting_asc_disabled span {
+            background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc_disabled.png') no-repeat center right;
+        }
+        table.dataTable thead .sorting_desc_disabled span {
+            background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right;
+        }
+        
+        table.dataTable thead .sorting::before,
+        table.dataTable thead .sorting_asc::before,
+        table.dataTable thead .sorting_desc::before,
+        table.dataTable thead .sorting_asc_disabled::before,
+        table.dataTable thead .sorting_desc_disabled::before {
+            content: "";
+        }
+        
+        table.dataTable thead .sorting::after,
+        table.dataTable thead .sorting_asc::after,
+        table.dataTable thead .sorting_desc::after,
+        table.dataTable thead .sorting_asc_disabled::after,
+        table.dataTable thead .sorting_desc_disabled::after {
+            content: "";
+        }
     </style>  
 </head>
 <body>
@@ -52,7 +98,7 @@
         // },
         lengthChange: false,
         bInfo : false,
-        processing: true,
+        // processing: true,
         serverSide: true,
         ajax: "{{ route('users') }}",
         columns: [
@@ -61,14 +107,18 @@
             {
                 data: 'action', 
                 name: 'action', 
-                orderable: true, 
-                searchable: true
+                orderable: false, 
+                searchable: false,
             },
         ]
     });
     $("#DataTables_Table_0_filter").parent().removeClass('col-md-6');
     $("#DataTables_Table_0_filter").parent().prev().hide();
     $('#DataTables_Table_0_filter').append('<button id="addRow">Add new</button>');
+    $('.sorting_asc')
+    table.columns().iterator('column', function (ctx, idx) {
+        $(table.column(idx).header()).append('<span class="sort-icon"/>');
+    });
   });
 </script>
 </html>
