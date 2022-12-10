@@ -7,6 +7,16 @@
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
+        #DataTables_Table_0_filter{
+            width: 100%;
+            text-align: left;
+        }
+        #DataTables_Table_0_filter span{
+            float: left;
+        }
+        #DataTables_Table_0_filter #addRow{
+            float: right;
+        }
         .paginate_button{
             padding: 1px !important;
         }  
@@ -37,11 +47,14 @@
   $(function () {
     
     var table = $('.yajra-datatable').DataTable({
+        // language: {
+        //     search: ""
+        // },
         lengthChange: false,
         bInfo : false,
         processing: true,
         serverSide: true,
-        ajax: "{{ route('users.list') }}",
+        ajax: "{{ route('users') }}",
         columns: [
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
@@ -53,6 +66,8 @@
             },
         ]
     });
+    $("#DataTables_Table_0_filter").parent().removeClass('col-md-6');
+    $("#DataTables_Table_0_filter").parent().prev().hide();
     $('#DataTables_Table_0_filter').append('<button id="addRow">Add new</button>');
   });
 </script>

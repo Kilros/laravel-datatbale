@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [UserController::class, 'index'])->name('users');
-Route::get('users', [UserController::class, 'getUsers'])->name('users.list');
+Route::get('user/edit/{id}', [UserController::class, 'editUser'])->where('id', '[0-9]+')->name('user.edit');

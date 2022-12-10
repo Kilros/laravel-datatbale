@@ -8,9 +8,17 @@ use Yajra\DataTables\DataTables as DataTablesDataTables;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('user');
+        if ($request->ajax()) {
+            return $this->getUsers($request);
+         }
+    
+         if (view()->exists('user')) {
+            return view('user');
+         }
+    
+         return abort('404');
     }
     public function getUsers(Request $request)
     {
